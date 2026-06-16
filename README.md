@@ -6,6 +6,8 @@ A **native, zero-Java APK toolkit**. REapk parses and rewrites Android's binary 
 pip install reapk
 ```
 
+Documentation: [jrbusiness.github.io/REapk](https://jrbusiness.github.io/REapk/)
+
 ## Pipeline
 
 <p align="center">
