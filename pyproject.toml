@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reapk"
+version = "0.1.0"
+description = "Native, zero-Java APK toolkit: AXML/arsc parsing, DEX disassemble/assemble/whole-DEX rewrite, native zipalign and v2/v3 APK signing."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Jerry Luong", email = "jerry.luong.94@gmail.com" }]
+keywords = [
+    "android", "apk", "dex", "smali", "axml", "arsc", "disassembler",
+    "assembler", "reverse-engineering", "zipalign", "signing",
+    "security", "bytecode",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+    "Topic :: Software Development :: Disassemblers",
+    "Topic :: Utilities",
+]
+dependencies = ["cryptography>=3.4"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+playground = ["jupyter>=1.0", "nbmake>=1.5", "pytest>=7"]
+docs = ["mkdocs-material>=9.5"]
+
+[project.scripts]
+reapk = "reapk.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/JRBusiness/reapk"
+Repository = "https://github.com/JRBusiness/reapk"
+Issues = "https://github.com/JRBusiness/reapk/issues"
+
+[tool.setuptools.packages.find]
+include = ["reapk*"]
+
+[tool.setuptools.package-data]
+reapk = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+# E701/E702: the binary-format parsers use compact `a; b` statements on purpose.
+ignore = ["E701", "E702"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["F401"]   # re-export modules

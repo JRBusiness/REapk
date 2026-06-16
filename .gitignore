@@ -1,0 +1,31 @@
+# byte-compiled / packaging
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# mkdocs build output
+site/
+
+# virtualenvs
+.venv/
+venv/
+
+# tool caches
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+
+# sample binaries / downloaded tooling (never publish these)
+*.apk
+*.apks
+*.apkm
+*.xapk
+*.dex
+*.jar
+
+# personal helper: embeds a Google Play auth token
+download_apk.py
+

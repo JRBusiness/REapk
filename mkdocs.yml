@@ -1,0 +1,46 @@
+site_name: REapk
+site_description: Native, zero-Java APK toolkit for recon, DEX patching, and v2/v3 signing.
+repo_url: https://github.com/JRBusiness/reapk
+repo_name: JRBusiness/reapk
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+
+exclude_docs: |
+  superpowers/
+  *.bpmn
+
+nav:
+  - Home: index.md
+  - DEX engine:
+      - Overview: dex-engine/index.md
+      - Concepts: dex-engine/concepts.md
+      - Getting started: dex-engine/getting-started.md
+      - Guide: dex-engine/guide.md
+      - API reference: dex-engine/api.md
+      - Playground: dex-engine/playground.md

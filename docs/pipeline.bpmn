@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:aio="http://aio-upgrade/schema/1.0" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="reapk_pipeline" targetNamespace="https://github.com/JRBusiness/reapk" exporter="Camunda Modeler" exporterVersion="5.47.0">
+  <bpmn:process id="Process_reapk" name="reapk pipeline" isExecutable="false">
+    <bpmn:startEvent id="Start_Apk" name="APK / XAPK">
+      <bpmn:outgoing>Flow_start_load</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_Load" name="Load base split">
+      <bpmn:incoming>Flow_start_load</bpmn:incoming>
+      <bpmn:outgoing>Flow_load_detect</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Detect" name="Detect framework">
+      <bpmn:incoming>Flow_load_detect</bpmn:incoming>
+      <bpmn:outgoing>Flow_detect_gw</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Op" name="Pick Option">
+      <bpmn:incoming>Flow_detect_gw</bpmn:incoming>
+      <bpmn:outgoing>Flow_gw_parse</bpmn:outgoing>
+      <bpmn:outgoing>Flow_gw_patch</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_Parse" name="Parse AndroidManifest (AXML)">
+      <bpmn:incoming>Flow_gw_parse</bpmn:incoming>
+      <bpmn:outgoing>Flow_parse_resolve</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Resolve" name="Resolve refs via resources.arsc">
+      <bpmn:incoming>Flow_parse_resolve</bpmn:incoming>
+      <bpmn:outgoing>Flow_resolve_scan</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Scan" name="Scan DEX strings / secrets / deeplinks">
+      <bpmn:incoming>Flow_resolve_scan</bpmn:incoming>
+      <bpmn:outgoing>Flow_scan_report</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="End_Report" name="Report (JSON)">
+      <bpmn:incoming>Flow_scan_report</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="Task_Patch" name="Patch manifest IR / replace DEX method">
+      <bpmn:incoming>Flow_gw_patch</bpmn:incoming>
+      <bpmn:outgoing>Flow_patch_align</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Align" name="zipalign">
+      <bpmn:incoming>Flow_patch_align</bpmn:incoming>
+      <bpmn:outgoing>Flow_align_sign</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Sign" name="Sign v2 / v3">
+      <bpmn:incoming>Flow_align_sign</bpmn:incoming>
+      <bpmn:outgoing>Flow_sign_apk</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="End_Apk" name="Signed APK">
+      <bpmn:incoming>Flow_sign_apk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_start_load" sourceRef="Start_Apk" targetRef="Task_Load" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_load_detect" sourceRef="Task_Load" targetRef="Task_Detect" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_detect_gw" sourceRef="Task_Detect" targetRef="Gateway_Op" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_gw_parse" name="analyze / js / dex" sourceRef="Gateway_Op" targetRef="Task_Parse" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_parse_resolve" sourceRef="Task_Parse" targetRef="Task_Resolve" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_resolve_scan" sourceRef="Task_Resolve" targetRef="Task_Scan" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_scan_report" sourceRef="Task_Scan" targetRef="End_Report" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_gw_patch" name="patch / dexpatch / dexreplace" sourceRef="Gateway_Op" targetRef="Task_Patch" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_patch_align" sourceRef="Task_Patch" targetRef="Task_Align" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_align_sign" sourceRef="Task_Align" targetRef="Task_Sign" aio:animated="true" />
+    <bpmn:sequenceFlow id="Flow_sign_apk" sourceRef="Task_Sign" targetRef="End_Apk" aio:animated="true" />
+    <bpmn:group id="Group_1asehdz" aio:background="true" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_reapk">
+      <bpmndi:BPMNShape id="Start_Apk_di" bpmnElement="Start_Apk">
+        <dc:Bounds x="222" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="211" y="315" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Load_di" bpmnElement="Task_Load">
+        <dc:Bounds x="310" y="250" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Detect_di" bpmnElement="Task_Detect">
+        <dc:Bounds x="480" y="250" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Op_di" bpmnElement="Gateway_Op" isMarkerVisible="true">
+        <dc:Bounds x="650" y="265" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="709" y="283" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Parse_di" bpmnElement="Task_Parse">
+        <dc:Bounds x="770" y="130" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Resolve_di" bpmnElement="Task_Resolve">
+        <dc:Bounds x="940" y="130" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Scan_di" bpmnElement="Task_Scan">
+        <dc:Bounds x="1110" y="130" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Patch_di" bpmnElement="Task_Patch">
+        <dc:Bounds x="770" y="370" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Align_di" bpmnElement="Task_Align">
+        <dc:Bounds x="940" y="370" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Sign_di" bpmnElement="Task_Sign">
+        <dc:Bounds x="1110" y="370" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Report_di" bpmnElement="End_Report">
+        <dc:Bounds x="1302" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1285" y="195" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Apk_di" bpmnElement="End_Apk">
+        <dc:Bounds x="1302" y="392" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1291" y="435" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_start_load_di" bpmnElement="Flow_start_load">
+        <di:waypoint x="258" y="290" />
+        <di:waypoint x="310" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_load_detect_di" bpmnElement="Flow_load_detect">
+        <di:waypoint x="430" y="290" />
+        <di:waypoint x="480" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_detect_gw_di" bpmnElement="Flow_detect_gw">
+        <di:waypoint x="600" y="290" />
+        <di:waypoint x="650" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_gw_parse_di" bpmnElement="Flow_gw_parse" bioc:stroke="#205022" color:border-color="#205022">
+        <di:waypoint x="675" y="265" />
+        <di:waypoint x="675" y="170" />
+        <di:waypoint x="770" y="170" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="579" y="183" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_parse_resolve_di" bpmnElement="Flow_parse_resolve" bioc:stroke="#205022" color:border-color="#205022">
+        <di:waypoint x="890" y="170" />
+        <di:waypoint x="940" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_resolve_scan_di" bpmnElement="Flow_resolve_scan" bioc:stroke="#205022" color:border-color="#205022">
+        <di:waypoint x="1060" y="170" />
+        <di:waypoint x="1110" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_scan_report_di" bpmnElement="Flow_scan_report" bioc:stroke="#205022" color:border-color="#205022">
+        <di:waypoint x="1230" y="170" />
+        <di:waypoint x="1302" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_gw_patch_di" bpmnElement="Flow_gw_patch" bioc:stroke="#5b176d" color:border-color="#5b176d">
+        <di:waypoint x="675" y="315" />
+        <di:waypoint x="675" y="410" />
+        <di:waypoint x="770" y="410" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="586" y="376" width="87" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_patch_align_di" bpmnElement="Flow_patch_align" bioc:stroke="#5b176d" color:border-color="#5b176d">
+        <di:waypoint x="890" y="410" />
+        <di:waypoint x="940" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_align_sign_di" bpmnElement="Flow_align_sign" bioc:stroke="#5b176d" color:border-color="#5b176d">
+        <di:waypoint x="1060" y="410" />
+        <di:waypoint x="1110" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_sign_apk_di" bpmnElement="Flow_sign_apk" bioc:stroke="#5b176d" color:border-color="#5b176d">
+        <di:waypoint x="1230" y="410" />
+        <di:waypoint x="1302" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Group_1asehdz_di" bpmnElement="Group_1asehdz">
+        <dc:Bounds x="160" y="90" width="1240" height="420" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
