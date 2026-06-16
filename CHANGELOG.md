@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented here. The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [0.1.0] - 2026-06-14
+## [0.1.1] - 2026-06-16
 
 Initial release. A native, zero-Java APK toolkit that parses and rewrites Android's binary formats directly in Python, with no third-party tools and no JVM.
 
@@ -18,4 +18,4 @@ Initial release. A native, zero-Java APK toolkit that parses and rewrites Androi
 - **Display helpers** in `reapk.playground` (`dump_dex`, `hexdump`, `show_smali`) and an example notebook that walks the engine against a real APK.
 - A typed package (`py.typed`), an exception hierarchy (`REapkError` and friends), and a test suite covering unit tests, signer structure, and integration round-trip oracles.
 
-[0.1.0]: https://github.com/JRBusiness/reapk/releases/tag/v0.1.0
+[0.1.1]: https://github.com/JRBusiness/reapk/releases/tag/v0.1.1

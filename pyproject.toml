@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "reapk"
-version = "0.1.0"
+version = "0.1.1"
 description = "Native, zero-Java APK toolkit: AXML/arsc parsing, DEX disassemble/assemble/whole-DEX rewrite, native zipalign and v2/v3 APK signing."
 readme = "README.md"
 requires-python = ">=3.8"
