@@ -23,4 +23,4 @@ pip install reapk
 
 ## License
 
-MIT. See the [LICENSE](https://github.com/JRBusiness/reapk/blob/main/LICENSE) file.
+MIT. See the [LICENSE](https://github.com/JRBusiness/REapk/blob/main/LICENSE) file.

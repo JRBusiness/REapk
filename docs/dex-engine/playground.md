@@ -1,6 +1,6 @@
 # Playground
 
-The repository ships a runnable Jupyter notebook that walks the whole engine against a real app: [`examples/notebooks/playground.ipynb`](https://github.com/JRBusiness/reapk/blob/main/examples/notebooks/playground.ipynb).
+The repository ships a runnable Jupyter notebook that walks the whole engine against a real app: [`examples/notebooks/playground.ipynb`](https://github.com/JRBusiness/REapk/blob/main/examples/notebooks/playground.ipynb).
 
 ## Run it
 

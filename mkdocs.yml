@@ -1,6 +1,6 @@
 site_name: REapk
 site_description: Native, zero-Java APK toolkit for recon, DEX patching, and v2/v3 signing.
-repo_url: https://github.com/JRBusiness/reapk
+repo_url: https://github.com/JRBusiness/REapk
 repo_name: JRBusiness/reapk
 
 theme:

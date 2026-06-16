@@ -66,7 +66,7 @@ A bare path with no subcommand defaults to `analyze`. Every command is fully nat
 ## Development
 
 ```bash
-git clone https://github.com/JRBusiness/reapk && cd reapk
+git clone https://github.com/JRBusiness/REapk && cd reapk
 pip install -e .[test]
 pytest -q                 # unit + signer tests (integration skipped w/o an APK)
 ruff check .              # lint

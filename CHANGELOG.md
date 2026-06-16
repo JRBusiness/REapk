@@ -18,4 +18,4 @@ Initial release. A native, zero-Java APK toolkit that parses and rewrites Androi
 - **Display helpers** in `reapk.playground` (`dump_dex`, `hexdump`, `show_smali`) and an example notebook that walks the engine against a real APK.
 - A typed package (`py.typed`), an exception hierarchy (`REapkError` and friends), and a test suite covering unit tests, signer structure, and integration round-trip oracles.
 
-[0.1.1]: https://github.com/JRBusiness/reapk/releases/tag/v0.1.1
+[0.1.1]: https://github.com/JRBusiness/REapk/releases/tag/v0.1.1

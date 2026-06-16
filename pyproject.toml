@@ -37,9 +37,9 @@ docs = ["mkdocs-material>=9.5"]
 reapk = "reapk.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/JRBusiness/reapk"
-Repository = "https://github.com/JRBusiness/reapk"
-Issues = "https://github.com/JRBusiness/reapk/issues"
+Homepage = "https://github.com/JRBusiness/REapk"
+Repository = "https://github.com/JRBusiness/REapk"
+Issues = "https://github.com/JRBusiness/REapk/issues"
 
 [tool.setuptools.packages.find]
 include = ["reapk*"]

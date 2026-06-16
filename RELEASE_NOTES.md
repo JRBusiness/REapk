@@ -16,4 +16,4 @@ pip install reapk
 
 Requires Python 3.8 or newer.
 
-See the [CHANGELOG](https://github.com/JRBusiness/reapk/blob/main/CHANGELOG.md) for the full list and the [docs](https://jrbusiness.github.io/reapk/) to get started.
+See the [CHANGELOG](https://github.com/JRBusiness/REapk/blob/main/CHANGELOG.md) for the full list and the [docs](https://jrbusiness.github.io/REapk/) to get started.
